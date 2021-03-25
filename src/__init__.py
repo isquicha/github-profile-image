@@ -16,7 +16,7 @@ def _get_image_link_from_page(page) -> str:
     return image_link
 
 
-def get_user_image(user: str) -> str:
+def get_user_image_link(user: str) -> str:
     uri = f"{URL}/{user}"
     page = _get_profile_page(uri=uri)
     return _get_image_link_from_page(page)
