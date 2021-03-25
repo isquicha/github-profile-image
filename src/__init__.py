@@ -8,6 +8,26 @@ URL = "https://github.com"
 
 
 def _get_profile_page(uri: str) -> Response.content:
+    """Get user profile page
+
+    Parameters
+    ----------
+    uri : str
+        The user's github profile page URI (https://github.com/username)
+
+    Returns
+    -------
+    Response.content
+        The page content: an HTML page
+
+    Raises
+    ------
+    ProfileNotFoundError
+        If user does not exits
+    ProfilePageUnavailabeError
+        If any other error occurs
+    """
+
     response = get(uri)
     if response.status_code == 404:
         raise ProfileNotFoundError
