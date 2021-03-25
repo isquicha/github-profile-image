@@ -2,11 +2,18 @@ from bs4 import BeautifulSoup
 from requests import get
 from requests.models import Response
 
+from src.errors import ProfileNotFoundError, ProfilePageUnavailabeError
+
 URL = "https://github.com"
 
 
 def _get_profile_page(uri: str) -> Response.content:
-    return get(uri).content
+    response = get(uri)
+    if response.status_code == 404:
+        raise ProfileNotFoundError
+    if response.status_code != 200:
+        raise ProfilePageUnavailabeError
+    return response.content
 
 
 def _get_image_link_from_page(page) -> str:
