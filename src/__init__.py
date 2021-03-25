@@ -38,7 +38,17 @@ def _get_profile_page(uri: str) -> Response.content:
 
 def _get_image_link_from_page(page) -> str:
     soup = BeautifulSoup(page, "html.parser")
-    image = soup.find("img", {"class": "avatar-user"})
+    image = soup.find(
+        name="img",
+        attrs={
+            "class": lambda classes: all(
+                [
+                    _class in classes.split()
+                    for _class in ["avatar-user", "width-full"]
+                ]
+            )
+        },
+    )
     image_link = image.get("src")
     return image_link
 
