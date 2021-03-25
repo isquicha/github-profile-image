@@ -3,13 +3,6 @@ from requests import get
 from requests.models import Response
 
 URL = "https://github.com"
-# class ImageNotFoundError(Exception):
-#     def __init__(self, *args: object) -> None:
-#         super().__init__(*args)
-#     if image is None:
-#         raise ImageNotFoundError(
-#             "Image not found in github user page. Check if user exists"
-#         )
 
 
 def _get_profile_page(uri: str) -> Response.content:
