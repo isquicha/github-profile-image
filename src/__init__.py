@@ -53,7 +53,7 @@ def _get_image_link_from_page(page) -> str:
     return image_link
 
 
-def get_user_image_link(user: str) -> str:
-    uri = f"{URL}/{user}"
+def get_user_image_link(username: str) -> str:
+    uri = f"{URL}/{username}"
     page = _get_profile_page(uri=uri)
     return _get_image_link_from_page(page)
