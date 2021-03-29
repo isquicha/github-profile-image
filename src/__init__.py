@@ -36,7 +36,22 @@ def _get_profile_page(uri: str) -> Response.content:
     return response.content
 
 
-def _get_image_link_from_page(page) -> str:
+def _get_image_link_from_page(page: Response.content) -> str:
+    """Get image link from page
+
+    Searches the HTML to find the image tag with specific CSS classes, then
+    gets the src attribute.
+
+    Parameters
+    ----------
+    page : Response.content
+        The page returned by the _get_profile_page function
+
+    Returns
+    -------
+    str
+        The image URI
+    """
     soup = BeautifulSoup(page, "html.parser")
     image = soup.find(
         name="img",
@@ -54,6 +69,18 @@ def _get_image_link_from_page(page) -> str:
 
 
 def get_user_image_link(username: str) -> str:
+    """Get github user image link
+
+    Parameters
+    ----------
+    username : str
+        Github user's username
+
+    Returns
+    -------
+    str
+        URI to user's profile image
+    """
     uri = f"{URL}/{username}"
     page = _get_profile_page(uri=uri)
     return _get_image_link_from_page(page)
