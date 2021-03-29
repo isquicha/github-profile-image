@@ -1,0 +1,26 @@
+name: Python application
+defaults:
+  run:
+    shell: bash
+    working-directory: .
+on:
+  push:
+    branches: [ citest ]
+  pull_request:
+    branches: [ citest ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.pip -r requirements.test.pip
+      - name: Run tests
+        run: |
+          pytest
+  
