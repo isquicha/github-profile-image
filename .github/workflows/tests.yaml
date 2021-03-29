@@ -1,13 +1,17 @@
-name: Python application
+name: Tests
 defaults:
   run:
     shell: bash
     working-directory: .
 on:
   push:
-    branches: [ citest ]
+    branches: 
+      - main
+      - develop
   pull_request:
-    branches: [ citest ]
+    branches:
+      - main
+      - develop
 jobs:
   build:
     runs-on: ubuntu-latest
